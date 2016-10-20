@@ -1,0 +1,21 @@
+----
+
+- name: Ansible Playbook for configuring brand new Raspberry Pi
+
+hosts: all
+  remote_user: root
+  gather_facts: no
+  tasks:
+    - name: Update package lists
+      apt: update_cache=yes
+    - name: Install minimal required packages
+      apt: pkg=git,screen,htop,zsh,less,vim state=present
+    - name: Remove unwanted packages
+      apt: pkg=dbus,tasksel,tasksel-data,gcc-4.8-base,debconf-i18n,nfacct,xdg-user-dirs,nano,vim-tiny state=absent purge=yes
+    - name: Install available package updates
+      apt: upgrade=dist purge=yes
+    # - include: load_balancers.yml
+    # - name: Resize root partition to maximum size
+    #  command: printf "p\nd\n2\nn\np\n\n\n\nw\n" | fdisk /dev/mmcblk0
+    # - name: Resize the file system, too
+    #  command: resize2fs /dev/mmcblk0p2

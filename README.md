@@ -1,4 +1,4 @@
-Raspberry-Bitcoin
+Ansible baseline configuration for raspberrypi
 =================
 
 [![Build Status](http://img.shields.io/travis/facastagnini/ansible-raspberrypi-baseline.svg)](http://travis-ci.org/facastagnini/ansible-raspberrypi-baseline)

@@ -2,7 +2,6 @@ Raspberry-Bitcoin
 =================
 
 [![Build Status](http://img.shields.io/travis/facastagnini/ansible-raspberrypi-baseline.svg)](http://travis-ci.org/facastagnini/ansible-raspberrypi-baseline)
-[![Dependencies](http://img.shields.io/gemnasium/facastagnini/ansible-raspberrypi-baseline.svg)](https://gemnasium.com/facastagnini/ansible-raspberrypi-baseline)
 
 This is a baseline configuration for Raspberry Pi. It will configure the basic stuff that is common to all my raspberry pi installations like ssh, ntp, etc. Check the list of features.
 

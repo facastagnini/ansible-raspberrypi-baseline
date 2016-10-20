@@ -78,16 +78,16 @@
       git: repo=https://github.com/sorin-ionescu/prezto.git
            dest=/home/federico/.zprezto
            recursive=yes
+    - name: Fix permissions after zprezto install
+      command: chown -R federico:federico /home/federico/.zprezto
     - name: Linking zprezto rc files
-      file: src=/tmp/{{ item.src }} dest={{ item.dest }} state=link
+      file: src=/tmp/{{ item.src }} dest={{ item.dest }} state=link owner=federico group=federico force=true
       with_items:
         - { src: '/home/federico/.zprezto/runcoms/zlogin',    dest: '/home/federico/.zlogin' }
         - { src: '/home/federico/.zprezto/runcoms/zpreztorc', dest: '/home/federico/.zpreztorc' }
         - { src: '/home/federico/.zprezto/runcoms/zprofile',  dest: '/home/federico/.zprofile' }
         - { src: '/home/federico/.zprezto/runcoms/zshenv',    dest: '/home/federico/.zshenv' }
         - { src: '/home/federico/.zprezto/runcoms/zshrc',     dest: '/home/federico/.zshrc' }
-    - name: Fix permissions after zprezto install
-      command: chown -R federico:federico /home/federico
     ##############################
 
     ##############################

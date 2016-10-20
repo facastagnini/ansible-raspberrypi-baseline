@@ -4,7 +4,7 @@
  - src: tersmitten.timezone
  - src: tersmitten.locales
  - src: tersmitten.ntp
- - src: tersmitten.swapfile
+# - src: tersmitten.swapfile
  - src: tersmitten.pip
  - src: tersmitten.fail2ban
  - src: jnv.unattended-upgrades
@@ -12,6 +12,7 @@
  - src: mivok0.sudo
  - src: mivok0.hosts
  - src: mattwillsher.sshd
- - src: pbuyle.exim4
- - src: MichaelRigart.aliases
- - src: mikegleasonjr.firewall
+# - src: pbuyle.exim4
+# - src: MichaelRigart.aliases
+# - src: mikegleasonjr.firewall
+ - src: geerlingguy.raspberry-pi

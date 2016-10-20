@@ -17,6 +17,10 @@
         uid: 2001
         ssh_key:
           - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIWzy21UpPuFHiX0ENDB0K7SEFvOQW00REvlITr6MnZEI1izGpfhPh4Bfns/dx8IBf5pQZnJsqR1WdHCg9feqSb9gpyLl1CPnT1mXQJYefelSwgjQA5r8JEwPBLQldQeVYbWmeJbnzU7iJQsA8qQW9/D5ETTMl4fiJ4edrtFTJblHhq3kfJBACvfBEPE78hFSe/GgTe9mvQRMhhwXqhofUZ//oN6wLtXDH4IoLVOPpnMhPHVCL9kaThq8DbNLDkl5ZNIzT2pCKmtavVzJ3XeOnSJUuGKFvLqpqBanRHvt1Glfy3VEzOkCz9GUMF3u+/v+UUtOrESocfSOFy2QWYAbZ fede@arroz-con-leche"
+    raspberry_pi_boot_config_options:
+      # Set the GPU memory split value.
+      - regexp: "^#?gpu_mem"
+        line: "gpu_mem=16"
   roles:
     - { role: tersmitten.timezone }   # set timezone to UTC
     - { role: tersmitten.locales }    # set locale to en_US.UTF-8 UTF-8
@@ -40,6 +44,8 @@
         - vagrant
         - "%sudo"
       users_create_per_user_group: false
+    - role: geerlingguy.raspberry-pi
+      notify: reboot
   tasks:
     - name: Update package lists
       apt: update_cache=yes
@@ -64,6 +70,7 @@
         - vim-tiny
     - name: Install available package updates
       apt: upgrade=dist purge=yes
+      notify: reboot
 
     ##############################
     # Install prezto
@@ -80,13 +87,26 @@
       command: chown -R federico:federico /home/federico
     ##############################
 
+    ##############################
+    # duckdns.org cronjob sample
+    - cron: name="duckdns update sample" minute="*/15" user="federico"
+            job="echo url=\"https://www.duckdns.org/update?domains=exampledomain&token=exampletoken&ip=\" | curl -k -o /tmp/duck.log -K - >/dev/null 2>&1"
+            cron_file=duckdns-update.sample
+            state=present
+            # disable=true
+
+    ##############################
     #
     # experimental features
     #
     # - name: Disable overscan
     #  replace: dest=/boot/firmware/config.txt regexp='^#disable_overscan=1' replace='disable_overscan=1'
     # - include: load_balancers.yml
-    # - name: Resize root partition to maximum size
-    #  command: printf "p\nd\n2\nn\np\n\n\n\nw\n" | fdisk /dev/mmcblk0
-    # - name: Resize the file system, too
-    #  command: resize2fs /dev/mmcblk0p2
+
+  handlers:
+    - name: reboot
+      command: shutdown -r now "Ansible updates triggered"
+      #command: ls -lah ./ 
+      async: 1
+      poll: 0
+      ignore_errors: true

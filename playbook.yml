@@ -75,12 +75,12 @@
       command: "{{ item }}"
       with_items:
         - git clone --recursive https://github.com/sorin-ionescu/prezto.git "/home/federico/.zprezto"
-        - ln -s /Users/federico/.zprezto/runcoms/zlogin /Users/federico/.zlogin
-        - ln -s /Users/federico/.zprezto/runcoms/zlogout /Users/federico/.zlogout
-        - ln -s /Users/federico/.zprezto/runcoms/zpreztorc /Users/federico/.zpreztorc
-        - ln -s /Users/federico/.zprezto/runcoms/zprofile /Users/federico/.zprofile
-        - ln -s /Users/federico/.zprezto/runcoms/zshenv /Users/federico/.zshenv
-        - ln -s /Users/federico/.zprezto/runcoms/zshrc /Users/federico/.zshrc
+        - ln -sf /Users/federico/.zprezto/runcoms/zlogin /Users/federico/.zlogin
+        - ln -sf /Users/federico/.zprezto/runcoms/zlogout /Users/federico/.zlogout
+        - ln -sf /Users/federico/.zprezto/runcoms/zpreztorc /Users/federico/.zpreztorc
+        - ln -sf /Users/federico/.zprezto/runcoms/zprofile /Users/federico/.zprofile
+        - ln -sf /Users/federico/.zprezto/runcoms/zshenv /Users/federico/.zshenv
+        - ln -sf: /Users/federico/.zprezto/runcoms/zshrc /Users/federico/.zshrc
         - chown -R federico:federico /Users/federico
     ##############################
 

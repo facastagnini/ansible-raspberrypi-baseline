@@ -13,7 +13,7 @@ cd ansible-raspberrypi-baseline
 git pull
  
 # download ansible galaxy dependencies
-ansible-galaxy install -r requirements.yml
+sudo ansible-galaxy install -r requirements.yml
 
 # test the playbook syntax
 sudo ansible-playbook -i inventory --syntax-check playbook.yml

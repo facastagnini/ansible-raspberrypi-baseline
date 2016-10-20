@@ -18,8 +18,8 @@
         ssh_key:
           - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIWzy21UpPuFHiX0ENDB0K7SEFvOQW00REvlITr6MnZEI1izGpfhPh4Bfns/dx8IBf5pQZnJsqR1WdHCg9feqSb9gpyLl1CPnT1mXQJYefelSwgjQA5r8JEwPBLQldQeVYbWmeJbnzU7iJQsA8qQW9/D5ETTMl4fiJ4edrtFTJblHhq3kfJBACvfBEPE78hFSe/GgTe9mvQRMhhwXqhofUZ//oN6wLtXDH4IoLVOPpnMhPHVCL9kaThq8DbNLDkl5ZNIzT2pCKmtavVzJ3XeOnSJUuGKFvLqpqBanRHvt1Glfy3VEzOkCz9GUMF3u+/v+UUtOrESocfSOFy2QWYAbZ fede@arroz-con-leche"
   roles:
-    - { role: tersmitten.timezone }
-    - { role: tersmitten.locales }
+    - { role: tersmitten.timezone }   # set timezone to UTC
+    - { role: tersmitten.locales }    # set locale to en_US.UTF-8 UTF-8
     - { role: tersmitten.ntp }
     # - { role: tersmitten.swapfile, swapfile_size: 4GB, swapfile_swappiness: 10 }
     - { role: jnv.unattended-upgrades }
@@ -49,7 +49,6 @@
         - htop
         - vim
         - sudo
-        - zsh
         - screen
     - name: Remove unwanted packages
       apt: pkg={{ item }} state=absent purge=yes
@@ -64,6 +63,31 @@
         - vim-tiny
     - name: Install available package updates
       apt: upgrade=dist purge=yes
+
+    ##############################
+    # Install zsh+prezto
+    - apt: name=zsh state=present
+    - name: Install zprezto for federico
+      args:
+        executable: /usr/bin/zsh
+        creates: /home/federico/.zshrc
+        chdir: /home/federico
+      command: "{{ item }}"
+        with_items:
+          - git clone --recursive https://github.com/sorin-ionescu/prezto.git "/home/federico/.zprezto"
+          - ln -s /Users/federico/.zprezto/runcoms/zlogin /Users/federico/.zlogin
+          - ln -s /Users/federico/.zprezto/runcoms/zlogout /Users/federico/.zlogout
+          - ln -s /Users/federico/.zprezto/runcoms/zpreztorc /Users/federico/.zpreztorc
+          - ln -s /Users/federico/.zprezto/runcoms/zprofile /Users/federico/.zprofile
+          - ln -s /Users/federico/.zprezto/runcoms/zshenv /Users/federico/.zshenv
+          - ln -s /Users/federico/.zprezto/runcoms/zshrc /Users/federico/.zshrc
+    ##############################
+
+    #
+    # experimental features
+    #
+    # - name: Disable overscan
+    #  replace: dest=/boot/firmware/config.txt regexp='^#disable_overscan=1' replace='disable_overscan=1'
     # - include: load_balancers.yml
     # - name: Resize root partition to maximum size
     #  command: printf "p\nd\n2\nn\np\n\n\n\nw\n" | fdisk /dev/mmcblk0

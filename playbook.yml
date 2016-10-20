@@ -71,13 +71,13 @@
       git: repo=https://github.com/sorin-ionescu/prezto.git
            dest=/home/federico/.zprezto
            recursive=yes
-    - file: dest=/Users/federico/.zprezto/runcoms/zlogin    src=/Users/federico/.zlogin    state=link
-    - file: dest=/Users/federico/.zprezto/runcoms/zpreztorc src=/Users/federico/.zpreztorc state=link
-    - file: dest=/Users/federico/.zprezto/runcoms/zprofile  src=/Users/federico/.zprofile  state=link
-    - file: dest=/Users/federico/.zprezto/runcoms/zshenv    src=/Users/federico/.zshenv    state=link
-    - file: dest=/Users/federico/.zprezto/runcoms/zshrc     src=/Users/federico/.zshrc     state=link
+    - file: dest=/home/federico/.zprezto/runcoms/zlogin    src=/home/federico/.zlogin    state=link
+    - file: dest=/home/federico/.zprezto/runcoms/zpreztorc src=/home/federico/.zpreztorc state=link
+    - file: dest=/home/federico/.zprezto/runcoms/zprofile  src=/home/federico/.zprofile  state=link
+    - file: dest=/home/federico/.zprezto/runcoms/zshenv    src=/home/federico/.zshenv    state=link
+    - file: dest=/home/federico/.zprezto/runcoms/zshrc     src=/home/federico/.zshrc     state=link
     - name: Fix permissions after zprezto install
-      command: chown -R federico:federico /Users/federico
+      command: chown -R federico:federico /home/federico
     ##############################
 
     #

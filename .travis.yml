@@ -6,10 +6,6 @@ before_install:
   # Make sure everything's up to date.
   - sudo apt-get update -qq
 
-install:
-  # Check if the repo is checked out right here
-  - ls -lha
-
 script:
   # Check if the bootstrap works
   - bash bootstrap.sh

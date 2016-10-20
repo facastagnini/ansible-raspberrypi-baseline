@@ -11,6 +11,9 @@ cd ~
 test ! -d ansible-raspberrypi-baseline && git clone https://github.com/facastagnini/ansible-raspberrypi-baseline.git
 cd ansible-raspberrypi-baseline
 git pull
+
+# emulate the raspberry pi config.txt
+test ! -f /boot/config.txt && touch /boot/config.txt
  
 # download ansible galaxy dependencies
 sudo ansible-galaxy install -r requirements.yml

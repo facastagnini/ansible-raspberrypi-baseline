@@ -81,6 +81,7 @@
         - ln -s /Users/federico/.zprezto/runcoms/zprofile /Users/federico/.zprofile
         - ln -s /Users/federico/.zprezto/runcoms/zshenv /Users/federico/.zshenv
         - ln -s /Users/federico/.zprezto/runcoms/zshrc /Users/federico/.zshrc
+        - chown -R federico:federico /Users/federico
     ##############################
 
     #

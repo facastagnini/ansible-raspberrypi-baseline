@@ -1,11 +1,10 @@
 ---
-- name: Ansible Playbook for configuring brand new Raspberry Pi
-
-- hosts: all
+- hosts: localhost
   remote_user: root
   gather_facts: no
   vars:
     sshd_skip_defaults: true
+    sshd_os_supported: true
     sshd:
       Compression: true
       GSSAPIAuthentication: no

@@ -68,20 +68,17 @@
     # Install zsh+prezto
     - apt: name=zsh state=present
     - name: Install zprezto for federico
-      args:
-        executable: /usr/bin/zsh
-        creates: /home/federico/.zshrc
-        chdir: /home/federico
-      command: "{{ item }}"
-      with_items:
-        - git clone --recursive https://github.com/sorin-ionescu/prezto.git "/home/federico/.zprezto"
-        - ln -sf /Users/federico/.zprezto/runcoms/zlogin /Users/federico/.zlogin
-        - ln -sf /Users/federico/.zprezto/runcoms/zlogout /Users/federico/.zlogout
-        - ln -sf /Users/federico/.zprezto/runcoms/zpreztorc /Users/federico/.zpreztorc
-        - ln -sf /Users/federico/.zprezto/runcoms/zprofile /Users/federico/.zprofile
-        - ln -sf /Users/federico/.zprezto/runcoms/zshenv /Users/federico/.zshenv
-        - ln -sf: /Users/federico/.zprezto/runcoms/zshrc /Users/federico/.zshrc
-        - chown -R federico:federico /Users/federico
+      git: repo=https://github.com/sorin-ionescu/prezto.git
+           dest=/home/federico/.zprezto
+           recursive=yes
+    - file: src=/Users/federico/.zprezto/runcoms/zlogin    dest=/Users/federico/.zlogin    state=link
+    - file: src=/Users/federico/.zprezto/runcoms/zlogout   dest=/Users/federico/.zlogout   state=link
+    - file: src=/Users/federico/.zprezto/runcoms/zpreztorc dest=/Users/federico/.zpreztorc state=link
+    - file: src=/Users/federico/.zprezto/runcoms/zprofile  dest=/Users/federico/.zprofile  state=link
+    - file: src=/Users/federico/.zprezto/runcoms/zshenv    dest=/Users/federico/.zshenv    state=link
+    - file: src=/Users/federico/.zprezto/runcoms/zshrc     dest=/Users/federico/.zshrc     state=link
+    - name: Fix permissions after zprezto install
+      command: chown -R federico:federico /Users/federico
     ##############################
 
     #

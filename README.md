@@ -23,6 +23,24 @@ Installation
 curl -sL https://raw.githubusercontent.com/facastagnini/ansible-raspberrypi-baseline/master/bootstrap.sh | sudo bash
 ```
 
+How to develop
+------------
+1) pre-requisites
+
+```bash
+brew update
+brew cask install virtualbox
+brew cask install vagrant
+
+# vagrant plugins
+vagrant plugin install vagrant-cachier
+```
+
+2) Bring up the test machine
+```bash
+vagrant up
+```
+
 Contributing and Development
 ----------------------------
 

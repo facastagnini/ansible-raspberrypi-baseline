@@ -1,10 +1,17 @@
-----
-
+---
 - name: Ansible Playbook for configuring brand new Raspberry Pi
 
-hosts: all
+- hosts: all
   remote_user: root
   gather_facts: no
+  vars:
+    sshd_skip_defaults: true
+    sshd:
+      Compression: true
+      GSSAPIAuthentication: no
+      PermitRootLogin: no
+  roles:
+    - role: mattwillsher.sshd
   tasks:
     - name: Update package lists
       apt: update_cache=yes

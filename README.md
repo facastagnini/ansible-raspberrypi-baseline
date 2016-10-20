@@ -16,10 +16,11 @@ Installation
 
 2) Finish the installation. If you are going move the rootfs to an external usb hard drive do it now (LINK).
 
-3) Bootstrap the pi
+3) Turn on the pi, ssh into it and run the oneliner
 
 ```bash
-curl -sL https://raw.githubusercontent.com/facastagnini/ansible-raspberrypi-baseline/master/bootstrap.sh | sudo bash
+$ ssh pi@1.2.3.4
+$ curl -sL https://raw.githubusercontent.com/facastagnini/ansible-raspberrypi-baseline/master/bootstrap.sh | sudo bash
 ```
 
 How to develop

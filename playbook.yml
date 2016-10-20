@@ -17,10 +17,10 @@
         uid: 2001
         ssh_key:
           - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIWzy21UpPuFHiX0ENDB0K7SEFvOQW00REvlITr6MnZEI1izGpfhPh4Bfns/dx8IBf5pQZnJsqR1WdHCg9feqSb9gpyLl1CPnT1mXQJYefelSwgjQA5r8JEwPBLQldQeVYbWmeJbnzU7iJQsA8qQW9/D5ETTMl4fiJ4edrtFTJblHhq3kfJBACvfBEPE78hFSe/GgTe9mvQRMhhwXqhofUZ//oN6wLtXDH4IoLVOPpnMhPHVCL9kaThq8DbNLDkl5ZNIzT2pCKmtavVzJ3XeOnSJUuGKFvLqpqBanRHvt1Glfy3VEzOkCz9GUMF3u+/v+UUtOrESocfSOFy2QWYAbZ fede@arroz-con-leche"
-    raspberry_pi_boot_config_options:
+    # raspberry_pi_boot_config_options:
       # Set the GPU memory split value.
-      - regexp: "^#?gpu_mem"
-        line: "gpu_mem=16"
+      # - regexp: "^#?gpu_mem"
+      #   line: "gpu_mem=16"
   roles:
     - { role: tersmitten.timezone }   # set timezone to UTC
     - { role: tersmitten.locales }    # set locale to en_US.UTF-8 UTF-8
@@ -44,8 +44,8 @@
         - vagrant
         - "%sudo"
       users_create_per_user_group: false
-    - role: geerlingguy.raspberry-pi
-      notify: reboot
+    # - role: geerlingguy.raspberry-pi
+    #   notify: reboot
   tasks:
     - name: Update package lists
       apt: update_cache=yes
@@ -78,11 +78,14 @@
       git: repo=https://github.com/sorin-ionescu/prezto.git
            dest=/home/federico/.zprezto
            recursive=yes
-    - file: dest=/home/federico/.zprezto/runcoms/zlogin    src=/home/federico/.zlogin    state=link
-    - file: dest=/home/federico/.zprezto/runcoms/zpreztorc src=/home/federico/.zpreztorc state=link
-    - file: dest=/home/federico/.zprezto/runcoms/zprofile  src=/home/federico/.zprofile  state=link
-    - file: dest=/home/federico/.zprezto/runcoms/zshenv    src=/home/federico/.zshenv    state=link
-    - file: dest=/home/federico/.zprezto/runcoms/zshrc     src=/home/federico/.zshrc     state=link
+    - name: Linking zprezto rc files
+      file: src=/tmp/{{ item.src }} dest={{ item.dest }} state=link
+      with_items:
+        - { src: '/home/federico/.zprezto/runcoms/zlogin',    dest: '/home/federico/.zlogin' }
+        - { src: '/home/federico/.zprezto/runcoms/zpreztorc', dest: '/home/federico/.zpreztorc' }
+        - { src: '/home/federico/.zprezto/runcoms/zprofile',  dest: '/home/federico/.zprofile' }
+        - { src: '/home/federico/.zprezto/runcoms/zshenv',    dest: '/home/federico/.zshenv' }
+        - { src: '/home/federico/.zprezto/runcoms/zshrc',     dest: '/home/federico/.zshrc' }
     - name: Fix permissions after zprezto install
       command: chown -R federico:federico /home/federico
     ##############################

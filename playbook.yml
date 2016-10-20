@@ -45,7 +45,6 @@
         - "%sudo"
       users_create_per_user_group: false
     # - role: geerlingguy.raspberry-pi
-    #   notify: reboot
   tasks:
     - name: Update package lists
       apt: update_cache=yes
@@ -70,7 +69,6 @@
         - vim-tiny
     - name: Install available package updates
       apt: upgrade=dist purge=yes
-      notify: reboot
 
     ##############################
     # Install prezto
@@ -105,11 +103,3 @@
     # - name: Disable overscan
     #  replace: dest=/boot/firmware/config.txt regexp='^#disable_overscan=1' replace='disable_overscan=1'
     # - include: load_balancers.yml
-
-  handlers:
-    - name: reboot
-      command: shutdown -r now "Ansible updates triggered"
-      #command: ls -lah ./ 
-      async: 1
-      poll: 0
-      ignore_errors: true

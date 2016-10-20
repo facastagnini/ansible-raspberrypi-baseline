@@ -24,4 +24,4 @@ sudo ansible-playbook -i inventory --syntax-check playbook.yml
 # Execute playbook
 sudo ansible-playbook -i inventory --connection=local --sudo -vvvv playbook.yml
 
-sudo reboot
+echo "You should reboot now to apply the config.txt changes."

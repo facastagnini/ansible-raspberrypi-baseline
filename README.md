@@ -19,7 +19,7 @@ Installation
 3) Turn on the pi, ssh into it and run the oneliner
 
 ```bash
-$ ssh pi@1.2.3.4
+$ ssh pi@raspberrypi
 $ curl -sL https://raw.githubusercontent.com/facastagnini/ansible-raspberrypi-baseline/master/bootstrap.sh | sudo bash
 ```
 

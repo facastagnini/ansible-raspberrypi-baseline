@@ -45,6 +45,7 @@
       sudo_users:
         - root
         - vagrant
+        - travis
         - "%sudo"
       users_create_per_user_group: false
     - role: geerlingguy.raspberry-pi

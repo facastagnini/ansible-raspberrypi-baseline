@@ -12,7 +12,7 @@ test ! -d ansible-raspberrypi-baseline && git clone https://github.com/facastagn
 cd ansible-raspberrypi-baseline
 git pull
 
-# emulate the raspberry pi config.txt
+# emulate the raspberry pi config.txt on test vms
 test ! -f /boot/config.txt && touch /boot/config.txt
  
 # download ansible galaxy dependencies

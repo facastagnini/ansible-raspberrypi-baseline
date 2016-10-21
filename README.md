@@ -22,6 +22,7 @@ Features
 - config.txt
 -- disable audio to avoid loading an extra kernel module (snd_bcm2835)
 -- gpu_mem=16
+- enable tmpfs for /tmp
 
 Installation
 ------------

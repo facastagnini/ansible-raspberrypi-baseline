@@ -112,6 +112,13 @@
     - sysctl:
         name: net.ipv6.conf.eth0.disable_ipv6
         value: 1
+    - name: Enable /tmp tmpfs
+      lineinfile:
+        dest: /etc/default/tmpfs
+        regexp: "^#?RAMTMP"
+        line: "RAMTMP=yes"
+        insertafter: EOF
+        state: present
 
     ##############################
     #

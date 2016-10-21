@@ -88,26 +88,26 @@
         - { src: '/home/federico/.zprezto/runcoms/zshrc',     dest: '/home/federico/.zshrc' }
     ##############################
 
-    # - cron: name="duckdns update sample" minute="*/15" user="federico"
-    #         job="echo url=\"https://www.duckdns.org/update?domains=exampledomain&token=exampletoken&ip=\" | curl -k -o /tmp/duck.log -K - >/dev/null 2>&1"
-    #         cron_file=duckdns-update.sample
-    #         state=present
-    #         disabled=yes
-    - sysctl:
-      name: vm.swappiness
-      value: 5
-    - sysctl:
-      name: net.ipv6.conf.all.disable_ipv6
-      value: 1
-    - sysctl:
-      name: net.ipv6.conf.default.disable_ipv6
-      value: 1
-    - sysctl:
-      name: net.ipv6.conf.lo.disable_ipv6
-      value: 1
-    - sysctl:
-      name: net.ipv6.conf.eth0.disable_ipv6
-      value: 1
+    - cron: name="duckdns update sample" minute="*/15" user="federico"
+            job="echo url=\"https://www.duckdns.org/update?domains=exampledomain&token=exampletoken&ip=\" | curl -k -o /tmp/duck.log -K - >/dev/null 2>&1"
+            cron_file=duckdns-update.sample
+            state=present
+            disabled=yes
+    # - sysctl:
+    #   name: vm.swappiness
+    #   value: 5
+    # - sysctl:
+    #   name: net.ipv6.conf.all.disable_ipv6
+    #   value: 1
+    # - sysctl:
+    #   name: net.ipv6.conf.default.disable_ipv6
+    #   value: 1
+    # - sysctl:
+    #   name: net.ipv6.conf.lo.disable_ipv6
+    #   value: 1
+    # - sysctl:
+    #   name: net.ipv6.conf.eth0.disable_ipv6
+    #   value: 1
 
     ##############################
     #

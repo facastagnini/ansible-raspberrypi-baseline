@@ -39,8 +39,6 @@ vagrant plugin install vagrant-cachier
 2) Bring up the test machine
 ```bash
 vagrant up
-vagrant ssh
-bash /vagrant/bootstrap.sh
 ```
 
 Contributing and Development

@@ -7,7 +7,18 @@ This is a baseline configuration for Raspberry Pi. It will configure the basic s
 
 Features
 ------------
-- Pending
+- ntp
+- locale set to en_US.UTF-8
+- timezone set to UTC
+- duckdns.org sample cronjob
+- automatic-upgrades
+- creates my username (ssh pubkey, zsh+zprezto)
+- sudo
+- ssh hardneded
+- fail2ban
+- installs common software
+- removes unwanted packages
+- disable_ipv6
 
 Installation
 ------------

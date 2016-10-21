@@ -20,7 +20,7 @@ Features
 - removes unwanted packages
 - disable_ipv6
 - config.txt
--- disable audio support to avoid loading an extra kernel module
+-- disable audio to avoid loading an extra kernel module (snd_bcm2835)
 -- gpu_mem=16
 
 Installation

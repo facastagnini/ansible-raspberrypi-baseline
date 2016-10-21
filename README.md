@@ -19,6 +19,9 @@ Features
 - installs common software
 - removes unwanted packages
 - disable_ipv6
+- config.txt
+-- disable audio support to avoid loading an extra kernel module
+-- gpu_mem=16
 
 Installation
 ------------

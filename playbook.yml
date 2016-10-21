@@ -17,10 +17,13 @@
         uid: 2001
         ssh_key:
           - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIWzy21UpPuFHiX0ENDB0K7SEFvOQW00REvlITr6MnZEI1izGpfhPh4Bfns/dx8IBf5pQZnJsqR1WdHCg9feqSb9gpyLl1CPnT1mXQJYefelSwgjQA5r8JEwPBLQldQeVYbWmeJbnzU7iJQsA8qQW9/D5ETTMl4fiJ4edrtFTJblHhq3kfJBACvfBEPE78hFSe/GgTe9mvQRMhhwXqhofUZ//oN6wLtXDH4IoLVOPpnMhPHVCL9kaThq8DbNLDkl5ZNIzT2pCKmtavVzJ3XeOnSJUuGKFvLqpqBanRHvt1Glfy3VEzOkCz9GUMF3u+/v+UUtOrESocfSOFy2QWYAbZ fede@arroz-con-leche"
-    # raspberry_pi_boot_config_options:
-      # Set the GPU memory split value.
-      # - regexp: "^#?gpu_mem"
-      #   line: "gpu_mem=16"
+    raspberry_pi_boot_config_options:
+        # dont load the audio kernel module
+      - regexp: "^#?dtparam=audio"
+        line: "dtparam=audio=off"
+        # minimize the gpu mem
+      - regexp: "^#?gpu_mem"
+        line: "gpu_mem=16"
   roles:
     - { role: tersmitten.timezone }   # set timezone to UTC
     - { role: tersmitten.locales }    # set locale to en_US.UTF-8 UTF-8
@@ -44,7 +47,7 @@
         - vagrant
         - "%sudo"
       users_create_per_user_group: false
-    # - role: geerlingguy.raspberry-pi
+    - role: geerlingguy.raspberry-pi
   tasks:
     - name: Update package lists
       apt: update_cache=yes

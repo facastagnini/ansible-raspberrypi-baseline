@@ -51,8 +51,10 @@ brew cask install vagrant
 vagrant plugin install vagrant-cachier
 ```
 
+2) fork this repo and clone
 2) Bring up the test machine
 ```bash
+cd ansible-raspberrypi-baseline
 vagrant up
 ```
 

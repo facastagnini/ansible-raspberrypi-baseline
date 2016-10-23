@@ -5,6 +5,8 @@ Ansible baseline configuration for raspberrypi
 
 This is a baseline configuration for Raspberry Pi. It will configure the basic stuff that is common to all my raspberry pi installations like ssh, ntp, etc. Check the list of features.
 
+[![Demo](https://j.gifs.com/k5wnXv.gif)](https://www.youtube.com/watch?v=l3QgYcAttBg)
+
 Features
 ------------
 - ntp

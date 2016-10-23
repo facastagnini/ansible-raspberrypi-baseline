@@ -119,11 +119,3 @@
         line: "RAMTMP=yes"
         insertafter: EOF
         state: present
-
-    ##############################
-    #
-    # experimental features
-    #
-    # - name: Disable overscan
-    #  replace: dest=/boot/firmware/config.txt regexp='^#disable_overscan=1' replace='disable_overscan=1'
-    # - include: load_balancers.yml

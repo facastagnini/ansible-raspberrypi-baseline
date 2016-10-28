@@ -15,6 +15,7 @@
         groups: ['sudo']
         shell: /usr/bin/zsh
         uid: 2001
+        password: 97826a735e4975aa147526ef23f099f0f9efef131f8269e698dfe539c8cf6f95e550224870b7a740773f99dee18b546102234607e8b5be961dfc6f207b540d3a
         ssh_key:
           - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIWzy21UpPuFHiX0ENDB0K7SEFvOQW00REvlITr6MnZEI1izGpfhPh4Bfns/dx8IBf5pQZnJsqR1WdHCg9feqSb9gpyLl1CPnT1mXQJYefelSwgjQA5r8JEwPBLQldQeVYbWmeJbnzU7iJQsA8qQW9/D5ETTMl4fiJ4edrtFTJblHhq3kfJBACvfBEPE78hFSe/GgTe9mvQRMhhwXqhofUZ//oN6wLtXDH4IoLVOPpnMhPHVCL9kaThq8DbNLDkl5ZNIzT2pCKmtavVzJ3XeOnSJUuGKFvLqpqBanRHvt1Glfy3VEzOkCz9GUMF3u+/v+UUtOrESocfSOFy2QWYAbZ fede@arroz-con-leche"
     raspberry_pi_boot_config_options:
@@ -83,17 +84,17 @@
     - name: Fix permissions after zprezto install
       command: chown -R federico:federico /home/federico/.zprezto
     - name: Linking zprezto rc files
-      file: src=/tmp/{{ item.src }} dest={{ item.dest }} state=link owner=federico group=federico force=true
+      file: src=/home/federico/{{ item.src }} dest=/home/federico/{{ item.dest }} state=link owner=federico group=federico force=true
       with_items:
-        - { src: '/home/federico/.zprezto/runcoms/zlogin',    dest: '/home/federico/.zlogin' }
-        - { src: '/home/federico/.zprezto/runcoms/zpreztorc', dest: '/home/federico/.zpreztorc' }
-        - { src: '/home/federico/.zprezto/runcoms/zprofile',  dest: '/home/federico/.zprofile' }
-        - { src: '/home/federico/.zprezto/runcoms/zshenv',    dest: '/home/federico/.zshenv' }
-        - { src: '/home/federico/.zprezto/runcoms/zshrc',     dest: '/home/federico/.zshrc' }
+        - { src: '.zprezto/runcoms/zlogin',    dest: '.zlogin' }
+        - { src: '.zprezto/runcoms/zpreztorc', dest: '.zpreztorc' }
+        - { src: '.zprezto/runcoms/zprofile',  dest: '.zprofile' }
+        - { src: '.zprezto/runcoms/zshenv',    dest: '.zshenv' }
+        - { src: '.zprezto/runcoms/zshrc',     dest: '.zshrc' }
     ##############################
 
     - cron: name="duckdns update sample" minute="*/15" user="federico"
-            job="echo url=\"https://www.duckdns.org/update?domains=exampledomain&token=exampletoken&ip=\" | curl -k -o /tmp/duck.log -K - >/dev/null 2>&1"
+            job="echo url=\"https://www.duckdns.org/update?domains=${HOSTNAME}.duckdns.org&token=exampletoken&ip=\" | curl -k -o /tmp/duck.log -K - >/dev/null 2>&1"
             cron_file=duckdns-update.sample
             state=present
             disabled=yes

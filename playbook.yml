@@ -8,7 +8,6 @@
       Compression: true
       GSSAPIAuthentication: no
       PermitRootLogin: no
-      # role: mivok0.users
     users:
       - username: federico
         name: Federico Castagnini
@@ -41,7 +40,7 @@
         logpath: /var/log/auth.log
         maxretry: 5
         findtime: 1800
-    - role: mivok0.users
+    - role: singleplatform-eng.users
     - role: mivok0.sudo
       sudo_users:
         - root
@@ -114,9 +113,6 @@
         name: net.ipv6.conf.eth0.disable_ipv6
         value: 1
     - name: Enable /tmp tmpfs
-      lineinfile:
-        dest: /etc/default/tmpfs
-        regexp: "^#?RAMTMP"
-        line: "RAMTMP=yes"
-        insertafter: EOF
-        state: present
+      command: systemctl enable tmp.mount
+      args:
+        creates: /lib/systemd/system/tmp.mount

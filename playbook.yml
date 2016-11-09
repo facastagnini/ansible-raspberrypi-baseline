@@ -5,9 +5,25 @@
   vars:
     sshd_skip_defaults: true
     sshd:
+      # https://dev.gentoo.org/~swift/docs/security_benchmarks/openssh.html
       Compression: true
       GSSAPIAuthentication: no
       PermitRootLogin: no
+      PasswordAuthentication: no
+      IgnoreRhosts: yes
+      RhostsRSAAuthentication: no
+      HostbasedAuthentication: no
+      PermitEmptyPasswords: no
+      UsePam: yes
+      ServerKeyBits: 2048
+      Protocol: 2
+      UsePrivilegeSeparation: yes
+      X11Forwarding: no
+      StrictModes: yes
+      # AllowGroup: ssh
+      # If not needed, disable TCP forwarding
+      AllowTcpForwarding: no
+      PubkeyAuthentication: yes
     users:
       - username: federico
         name: Federico Castagnini
@@ -83,7 +99,7 @@
     - name: Fix permissions after zprezto install
       command: chown -R federico:federico /home/federico/.zprezto
     - name: Linking zprezto rc files
-      file: src=/home/federico/{{ item.src }} dest=/home/federico/{{ item.dest }} owner=federico group=federico force=no
+      copy: src=/home/federico/{{ item.src }} dest=/home/federico/{{ item.dest }} owner=federico group=federico force=no
       with_items:
         - { src: '.zprezto/runcoms/zlogin',    dest: '.zlogin' }
         - { src: '.zprezto/runcoms/zpreztorc', dest: '.zpreztorc' }

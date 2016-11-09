@@ -131,4 +131,4 @@
     - name: Enable /tmp tmpfs
       command: systemctl enable tmp.mount
       args:
-        creates: /lib/systemd/system/tmp.mount
+        creates: /etc/systemd/system/local-fs.target.wants/tmp.mount

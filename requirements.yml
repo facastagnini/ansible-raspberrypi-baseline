@@ -16,3 +16,4 @@
 # - src: MichaelRigart.aliases
 # - src: mikegleasonjr.firewall
  - src: geerlingguy.raspberry-pi
+ - src: dev-sec.os-hardening

@@ -83,7 +83,7 @@
     - name: Fix permissions after zprezto install
       command: chown -R federico:federico /home/federico/.zprezto
     - name: Linking zprezto rc files
-      file: src=/home/federico/{{ item.src }} dest=/home/federico/{{ item.dest }} state=link owner=federico group=federico force=true
+      file: src=/home/federico/{{ item.src }} dest=/home/federico/{{ item.dest }} owner=federico group=federico force=false
       with_items:
         - { src: '.zprezto/runcoms/zlogin',    dest: '.zlogin' }
         - { src: '.zprezto/runcoms/zpreztorc', dest: '.zpreztorc' }

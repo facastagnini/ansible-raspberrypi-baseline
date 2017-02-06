@@ -82,6 +82,7 @@
         - sudo
         - zsh
         - screen
+        - dnsutils
     - name: Remove unwanted packages
       apt: pkg={{ item }} state=absent purge=yes
       with_items:

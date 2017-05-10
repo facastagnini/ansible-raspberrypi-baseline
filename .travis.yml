@@ -8,7 +8,7 @@ before_install:
 
 script:
   # Check if the bootstrap works
-  - bash bootstrap.sh
+  - sudo bash bootstrap.sh
 
 notifications:
   email:

@@ -1,10 +1,10 @@
-#~/bin/bash -aux
+#!/bin/bash -aux
 
 # Install Ansible and Git on the machine.
-sudo apt-get update
+apt-get update
 # sudo apt-get -y dist-upgrade
-sudo apt-get -y install git libssl-dev libffi-dev python-dev sshpass python-pip build-essential
-sudo pip install --upgrade pip ansible markupsafe
+apt-get -y install git libssl-dev libffi-dev python-dev sshpass python-pip build-essential
+pip install --upgrade pip ansible markupsafe
  
 # Clone this repo if missing
 cd ~
@@ -16,15 +16,15 @@ git pull
 test ! -f /boot/config.txt && touch /boot/config.txt
  
 # download ansible galaxy dependencies
-sudo ansible-galaxy install -r requirements.yml
+ansible-galaxy install -r requirements.yml
 
 # test the playbook syntax
-sudo ansible-playbook -i inventory --syntax-check playbook.yml
+ansible-playbook -i inventory --syntax-check playbook.yml
 
 # Execute playbook
-sudo ansible-playbook -i inventory --connection=local --sudo -vvvv playbook.yml
+ansible-playbook -i inventory --connection=local --sudo -vvvv playbook.yml
 
 # cleanup apt packages in the local cache
-sudo apt-get clean
+apt-get clean
 
 echo "You should reboot now to apply the config.txt changes."

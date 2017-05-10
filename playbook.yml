@@ -5,25 +5,25 @@
   vars:
     sshd_config:
       # https://dev.gentoo.org/~swift/docs/security_benchmarks/openssh.html
-      Compression: yes
-      GSSAPIAuthentication: no
-      PermitRootLogin: no
-      PasswordAuthentication: no
-      IgnoreRhosts: yes
-      RhostsRSAAuthentication: no
-      HostbasedAuthentication: no
-      PermitEmptyPasswords: no
-      UseDNS: no
-      UsePam: no
+      Compression: "yes"
+      GSSAPIAuthentication: "no"
+      PermitRootLogin: "no"
+      PasswordAuthentication: "no"
+      IgnoreRhosts: "yes"
+      RhostsRSAAuthentication: "no"
+      HostbasedAuthentication: "no"
+      PermitEmptyPasswords: "no"
+      UseDNS: "no"
+      UsePam: "no"
       ServerKeyBits: 2048
       Protocol: 2
-      UsePrivilegeSeparation: yes
-      X11Forwarding: no
-      StrictModes: yes
+      UsePrivilegeSeparation: "yes"
+      X11Forwarding: "no"
+      StrictModes: "yes"
       # AllowGroup: ssh
       # If not needed, disable TCP forwarding
-      AllowTcpForwarding: no
-      PubkeyAuthentication: yes
+      AllowTcpForwarding: "no"
+      PubkeyAuthentication: "yes"
 
     users:
       - username: federico

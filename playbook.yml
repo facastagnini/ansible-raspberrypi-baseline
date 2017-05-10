@@ -3,10 +3,9 @@
   hosts: localhost
   remote_user: root
   vars:
-    sshd_skip_defaults: true
-    sshd:
+    sshd_config:
       # https://dev.gentoo.org/~swift/docs/security_benchmarks/openssh.html
-      Compression: true
+      Compression: yes
       GSSAPIAuthentication: no
       PermitRootLogin: no
       PasswordAuthentication: no
@@ -14,7 +13,8 @@
       RhostsRSAAuthentication: no
       HostbasedAuthentication: no
       PermitEmptyPasswords: no
-      UsePam: yes
+      UseDNS: no
+      UsePam: no
       ServerKeyBits: 2048
       Protocol: 2
       UsePrivilegeSeparation: yes
@@ -42,6 +42,9 @@
         # minimize the gpu mem
       - regexp: "^#?gpu_mem"
         line: "gpu_mem=16"
+        # disable onboard BT
+      - regexp: "^#?dtoverlay=pi3-disable-bt-overlay"
+        line: "dtoverlay=pi3-disable-bt-overlay"
 
     # dev-sec.os-hardening
     ufw_manage_defaults: false
@@ -51,7 +54,7 @@
     - { role: tersmitten.ntp }
     # - { role: tersmitten.swapfile, swapfile_size: 4GB, swapfile_swappiness: 10 }
     - { role: jnv.unattended-upgrades }
-    - { role: mattwillsher.sshd }
+    - { role: reallyenglish.sshd }
     - role: tersmitten.fail2ban
       fail2ban_services:
       - name: ssh

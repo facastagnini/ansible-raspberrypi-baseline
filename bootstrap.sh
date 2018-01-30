@@ -1,9 +1,9 @@
 #!/bin/bash -eux
 
 # Install Ansible and Git on the machine.
-apt update
-sudo apt -y dist-upgrade
-apt -y install git libssl-dev libffi-dev python-dev sshpass python-pip build-essential
+apt-get update
+sudo apt-get -y dist-upgrade
+apt-get -y install git libssl-dev libffi-dev python-dev sshpass python-pip build-essential
 pip install --upgrade pip ansible markupsafe
  
 # Clone this repo if missing
@@ -25,6 +25,6 @@ ansible-playbook --inventory inventory --syntax-check playbook.yml
 ansible-playbook --inventory inventory --connection=local --become -vvvv playbook.yml
 
 # cleanup apt packages in the local cache
-apt clean
+apt-get clean
 
 echo "You should reboot now to apply the config.txt changes."

@@ -46,13 +46,32 @@
         # disable onboard BT
       - regexp: "^#?dtoverlay=pi3-disable-bt-overlay"
         line: "dtoverlay=pi3-disable-bt-overlay"
+        # Enable 1200ma USB current on newer model Pis.
+      - regexp: "^#?max_usb_current"
+        line: "max_usb_current=1"
 
     # dev-sec.os-hardening
     ufw_manage_defaults: false
+
+    sudoers_sudoers:
+      defaults:
+        - secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      user_aliases:
+        - name: TESTING
+          members: vagrant, travis
+      privileges:
+        - name: root
+          entry: "ALL=(ALL:ALL) ALL"
+        - name: "TESTING"
+          entry: "ALL=(ALL:ALL) ALL"
+        - name: "%sudo"
+          entry: "ALL=NOPASSWD:ALL"
   roles:
     - { role: tersmitten.timezone }   # set timezone to UTC
     - { role: tersmitten.locales }    # set locale to en_US.UTF-8 UTF-8
     - { role: tersmitten.ntp }
+    - { role: tersmitten.sudoers }
+    - { role: reallyenglish.sshd }
     # - { role: tersmitten.swapfile, swapfile_size: 4GB, swapfile_swappiness: 10 }
     - role: jnv.unattended-upgrades
       unattended_origins_patterns:
@@ -60,7 +79,6 @@
       unattended_automatic_reboot: true
       # unattended_mail_only_on_error: true
       # unattended_mail: 'federico.castagnini+raspberrypi@gmail.com'
-    - { role: reallyenglish.sshd }
     - role: tersmitten.fail2ban
       fail2ban_services:
       - name: ssh
@@ -70,16 +88,9 @@
         logpath: /var/log/auth.log
         maxretry: 5
         findtime: 1800
-    - role: singleplatform-eng.users
-    - role: mivok0.sudo
-      sudo_users:
-        - root
-        - vagrant
-        - travis
-        - "%sudo"
-      users_create_per_user_group: false
-    - role: geerlingguy.raspberry-pi
-    - role: dev-sec.os-hardening
+    - role: { singleplatform-eng.users }
+    - role: { geerlingguy.raspberry-pi }
+    - role: { dev-sec.os-hardening }
   tasks:
     - name: Update package lists
       apt: update_cache=yes
@@ -134,12 +145,17 @@
         - { name: 'net.ipv6.conf.all.disable_ipv6',     value: '1' }
         - { name: 'net.ipv6.conf.default.disable_ipv6', value: '1' }
         - { name: 'net.ipv6.conf.lo.disable_ipv6',      value: '1' }
-        - { name: 'net.ipv6.conf.eth0.disable_ipv6',    value: '1' }
         - { name: 'vm.swappiness', value: '5' }
         - { name: 'net.ipv4.tcp_syncookies', value: '1' }
         - { name: 'net.ipv4.conf.all.rp_filter', value: '1' }
         - { name: 'net.ipv4.tcp_max_syn_backlog', value: '2048' }
-    - name: Enable /tmp tmpfs
-      command: systemctl enable tmp.mount
-      args:
-        creates: /etc/systemd/system/local-fs.target.wants/tmp.mount
+    - name: Mount tmpfs paths
+      mount:
+        path: {{ item.path }}
+        src: tmpfs
+        fstype: tmpfs
+        opts: nodev,nosuid,size={{ item.size }}
+        state: present
+      with_items:
+        - { path: '/tmp',     size: '20M' }
+        - { path: '/var/tmp', size: '20M' }

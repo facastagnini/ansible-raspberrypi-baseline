@@ -22,5 +22,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--ioapic", "on"]
   end
 
+  # emulate the rc.local present in Raspbian
+  config.vm.provision "shell", inline: "test -f /etc/rc.local || echo 'exit 0' > /etc/rc.local"
+
+  # remove /etc/udev/rules.d/70-persistent-net.rules
+  config.vm.provision "shell", inline: "rm -rf /etc/udev/rules.d/70-persistent-net.rules"
+
   config.vm.provision "shell", path: "bootstrap.sh"
 end

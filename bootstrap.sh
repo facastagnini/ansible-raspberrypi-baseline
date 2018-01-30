@@ -1,4 +1,4 @@
-#!/bin/bash -eux
+#!/usr/bin/env bash -eux
 
 # Install Ansible and Git on the machine.
 apt-get update

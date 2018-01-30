@@ -7,9 +7,9 @@
 # - src: tersmitten.swapfile
  - src: tersmitten.pip
  - src: tersmitten.fail2ban
+ - src: tersmitten.sudoers
  - src: jnv.unattended-upgrades
  - src: singleplatform-eng.users
- - src: tersmitten.sudo
  - src: mivok0.hosts
  - src: reallyenglish.sshd
  - src: geerlingguy.raspberry-pi

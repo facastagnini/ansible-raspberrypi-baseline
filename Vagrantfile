@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   # get current image from https://github.com/ffuenf/vagrant-boxes
-  config.vm.box = "https://s3.eu-central-1.amazonaws.com/ffuenf-vagrantboxes/debian/debian-8.6.0-amd64_virtualbox.box"
+  config.vm.box = "ffuenf/debian-9.3.0-amd64"
 
   config.vm.provider "virtualbox" do |v|
     v.gui = false

@@ -1,9 +1,9 @@
 #!/bin/bash -eux
 
 # Install Ansible and Git on the machine.
-apt-get update
-sudo apt-get -y dist-upgrade
-apt-get -y install git libssl-dev libffi-dev python-dev sshpass python-pip build-essential
+apt update
+apt -y full-upgrade
+apt -y install git libssl-dev libffi-dev python-dev sshpass python-pip build-essential
 pip install --upgrade pip ansible markupsafe
  
 # Clone this repo if missing

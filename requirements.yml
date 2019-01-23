@@ -1,13 +1,13 @@
 # from galaxy
 
 # common
- - src: tersmitten.timezone
- - src: tersmitten.locales
- - src: tersmitten.ntp
-# - src: tersmitten.swapfile
- - src: tersmitten.pip
- - src: tersmitten.fail2ban
- - src: tersmitten.sudoers
+ - src: oefenweb.timezone
+ - src: oefenweb.locales
+ - src: oefenweb.ntp
+ - src: oefenweb.swapfile
+ - src: oefenweb.pip
+ - src: oefenweb.fail2ban
+ - src: oefenweb.sudoers
  - src: jnv.unattended-upgrades
  - src: singleplatform-eng.users
  - src: mivok0.hosts

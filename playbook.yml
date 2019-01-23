@@ -67,19 +67,19 @@
         - name: "%sudo"
           entry: "ALL=NOPASSWD:ALL"
   roles:
-    - { role: tersmitten.timezone }   # set timezone to UTC
-    - { role: tersmitten.locales }    # set locale to en_US.UTF-8 UTF-8
-    - { role: tersmitten.ntp }
-    - { role: tersmitten.sudoers }
+    - { role: oefenweb.timezone }   # set timezone to UTC
+    - { role: oefenweb.locales }    # set locale to en_US.UTF-8 UTF-8
+    - { role: oefenweb.ntp }
+    - { role: oefenweb.sudoers }
     - { role: reallyenglish.sshd }
-    # - { role: tersmitten.swapfile, swapfile_size: 4GB, swapfile_swappiness: 10 }
+    # - { role: oefenweb.swapfile, swapfile_size: 4GB, swapfile_swappiness: 10 }
     - role: jnv.unattended-upgrades
       unattended_origins_patterns:
       - 'origin=Raspbian,codename=${distro_codename},label=Raspbian'
       unattended_automatic_reboot: true
       # unattended_mail_only_on_error: true
       # unattended_mail: 'federico.castagnini+raspberrypi@gmail.com'
-    - role: tersmitten.fail2ban
+    - role: oefenweb.fail2ban
       fail2ban_services:
       - name: ssh
         enabled: true

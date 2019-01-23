@@ -29,14 +29,18 @@ Features
 Installation
 ------------
 
-1) Install Raspbian LITE on a 4Gb or bigger SD card. (There is a guide here https://www.raspberrypi.org/downloads/raspbian/)
+- Install Raspbian LITE on a 4Gb or bigger SD card. (There is a guide here https://www.raspberrypi.org/downloads/raspbian/)
 
-2) Finish the installation. If you are going move the rootfs to an external usb hard drive do it now.
+- If you are going move the rootfs to an external usb hard drive do it now.
 
-3) Turn on the pi, ssh into it and run the oneliner
+- [Enable sshd on a headless Raspberry Pi](https://www.raspberrypi.org/documentation/remote-access/ssh/)
+
+- If you will use wifi, this is the time to configure it.
+
+- Turn on the pi, ssh into it and run the oneliner
 
 ```bash
-$ ssh pi@raspberrypi
+$ ssh pi@raspberrypi (the default password is 'raspberry')
 $ curl -sL https://raw.githubusercontent.com/facastagnini/ansible-raspberrypi-baseline/master/bootstrap.sh | sudo bash
 ```
 

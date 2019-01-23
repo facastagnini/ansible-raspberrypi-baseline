@@ -40,7 +40,7 @@ Installation
 - Turn on the pi, ssh into it and run the oneliner
 
 ```bash
-$ ssh pi@raspberrypi
+$ ssh pi@raspberrypi (the default password is 'raspberry')
 $ curl -sL https://raw.githubusercontent.com/facastagnini/ansible-raspberrypi-baseline/master/bootstrap.sh | sudo bash
 ```
 

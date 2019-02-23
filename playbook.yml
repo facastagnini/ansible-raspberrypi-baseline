@@ -52,6 +52,7 @@
 
     # dev-sec.os-hardening
     ufw_manage_defaults: false
+    os_auditd_enabled: false
 
     sudoers_sudoers:
       defaults:

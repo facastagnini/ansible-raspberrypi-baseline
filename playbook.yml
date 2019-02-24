@@ -53,6 +53,12 @@
     # dev-sec.os-hardening
     ufw_manage_defaults: false
     os_auditd_enabled: false
+    sysctl_overwrite:
+      # Enable IPv4 traffic forwarding.
+      # net.ipv4.ip_forward: 1
+      vm.swappiness: 5
+      net.ipv4.tcp_syncookies: 1
+      net.ipv4.tcp_max_syn_backlog: 2048
 
     sudoers_sudoers:
       defaults:
@@ -141,15 +147,7 @@
             cron_file=duckdns-update.sample
             state=present
             disabled=yes
-    - sysctl: name={{ item.name }} value={{ item.value }}
-      with_items:
-        - { name: 'net.ipv6.conf.all.disable_ipv6',     value: '1' }
-        - { name: 'net.ipv6.conf.default.disable_ipv6', value: '1' }
-        - { name: 'net.ipv6.conf.lo.disable_ipv6',      value: '1' }
-        - { name: 'vm.swappiness', value: '5' }
-        - { name: 'net.ipv4.tcp_syncookies', value: '1' }
-        - { name: 'net.ipv4.conf.all.rp_filter', value: '1' }
-        - { name: 'net.ipv4.tcp_max_syn_backlog', value: '2048' }
+
     - name: Mount tmpfs paths
       mount:
         path={{ item.path }}

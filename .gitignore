@@ -9,4 +9,3 @@ pkg/
 .vagrant
 .cache
 playbook.retry
-secrets.yml

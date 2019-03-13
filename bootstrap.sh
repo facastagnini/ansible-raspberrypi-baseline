@@ -19,10 +19,10 @@ test ! -f /boot/config.txt && touch /boot/config.txt
 ansible-galaxy install -r requirements.yml
 
 # test the playbook syntax
-ansible-playbook --inventory inventory --syntax-check playbook.yml
+ansible-playbook --inventory inventory --extra-vars @secrets/secrets.yml --syntax-check playbook.yml
 
 # Execute playbook
-ansible-playbook --inventory inventory --connection=local --become -vvvv playbook.yml
+ansible-playbook --inventory inventory --extra-vars @secrets/secrets.yml --connection=local --become -vvvv playbook.yml
 
 # cleanup apt packages in the local cache
 apt-get clean

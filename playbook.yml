@@ -1,6 +1,14 @@
 ---
+- hosts: all
+  any_errors_fatal: true
+  roles:
+    - common
+
+#- name: Include users playbook
+#  import_playbook: hardening.yml
+
 - name: apply common configuration to raspberry pi nodes
-  hosts: localhost
+  hosts: all
   remote_user: root
   vars:
     sshd_config:
@@ -24,17 +32,6 @@
       # If not needed, disable TCP forwarding
       AllowTcpForwarding: "no"
       PubkeyAuthentication: "yes"
-
-    users:
-      - username: federico
-        name: Federico Castagnini
-        groups: ['sudo']
-        shell: /usr/bin/zsh
-        uid: 2001
-        password: 97826a735e4975aa147526ef23f099f0f9efef131f8269e698dfe539c8cf6f95e550224870b7a740773f99dee18b546102234607e8b5be961dfc6f207b540d3a
-        ssh_key:
-          - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIWzy21UpPuFHiX0ENDB0K7SEFvOQW00REvlITr6MnZEI1izGpfhPh4Bfns/dx8IBf5pQZnJsqR1WdHCg9feqSb9gpyLl1CPnT1mXQJYefelSwgjQA5r8JEwPBLQldQeVYbWmeJbnzU7iJQsA8qQW9/D5ETTMl4fiJ4edrtFTJblHhq3kfJBACvfBEPE78hFSe/GgTe9mvQRMhhwXqhofUZ//oN6wLtXDH4IoLVOPpnMhPHVCL9kaThq8DbNLDkl5ZNIzT2pCKmtavVzJ3XeOnSJUuGKFvLqpqBanRHvt1Glfy3VEzOkCz9GUMF3u+/v+UUtOrESocfSOFy2QWYAbZ fede@arroz-con-leche"
-          - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCS7wZEvrFGzTc8l8jQ7bUP4q70/1ycj9BrYHmoDk+JChlBUSoN3lMJgNZxDK+23P75TJdPzhoiehT3IuXDi1WIKyCU765cRQldc9rXfb6t/hEwErvIitKkNjD+j6nhf4cjly4tzsjr5G6NT2sKkkN9tJG99KAsibuNedCgTKfP2iQt/amTvbhCM7QdtlIpKpU6YjGMWgLuHfpYBkVSbKFrLUrI+uapv5jLEW1Uda3+nIW4wdVbFGD15H0Ga6T5THSGDIFSP+8XKSptBlQFBO3UzCl2uz7y5FPhVp0/Khf/AiTruyIdXWKMNgNS31G0RvS7nzImnsumm0zN13/5Tr3K8wnky3oKIz11Fbllucb5niHOnsfmphDf2jnxVVizCFI9f30ajs3pj+42xul85cMhvb1MGkbFxgkiNgMjOAptCrncDBZV8VQfou4AY9U/VCHdTZcRUr2oejRdMLKuVVnYY1lBKRx2vVAshdxbzWbeu3p9B7OaLILoTplwlWpSA2vuzt/NuY+OCQ5EQ+N9IN8MYZfydl13eHmkObEb96/oDuzcBywqEg7I0EkxMmv4XfoPp/uKmYmBLN0FzucP0ibdM5ARw101KPiuqE2JBk3m2OM8YQ4ApUEUoarUMUFcC4OEIFBLdymiqyNCrUaGWMJfbNqYpcVdsIAk6KEYjQnJ7Q== fede_gpg"
 
     raspberry_pi_boot_config_options:
         # dont load the audio kernel module
@@ -99,31 +96,6 @@
     - role: geerlingguy.raspberry-pi
     - role: dev-sec.os-hardening
   tasks:
-    - name: Update package lists
-      apt: update_cache=yes
-    - name: Install common software
-      apt: name={{ item }} state=present
-      with_items:
-        - htop
-        - vim
-        - sudo
-        - zsh
-        - screen
-        - dnsutils
-    - name: Remove unwanted packages
-      apt: pkg={{ item }} state=absent purge=yes
-      with_items:
-        - dbus
-        - tasksel
-        - tasksel-data
-        - debconf-i18n
-        - nfacct
-        - xdg-user-dirs
-        - nano
-        - vim-tiny
-    - name: Install available package updates
-      apt: upgrade=dist purge=yes
-
     ##############################
     # Install prezto
     - name: Install zprezto for federico

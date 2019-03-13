@@ -1,0 +1,38 @@
+---
+- name: test connection
+  ping:
+
+- name: run apt update
+  become: yes
+  become_user: root
+  apt:
+    update_cache: yes
+
+- name: Install available package updates
+  apt: upgrade=dist purge=yes
+
+- name: Install common software
+  apt: name={{ item }} state=present
+  with_items:
+    - htop
+    - vim
+    - sudo
+    - zsh
+    - screen
+    - dnsutils
+
+- name: Remove unwanted packages
+  apt: pkg={{ item }} state=absent purge=yes
+  with_items:
+    - dbus
+    - tasksel
+    - tasksel-data
+    - debconf-i18n
+    - nfacct
+    - xdg-user-dirs
+    - nano
+    - vim-tiny
+
+- name: Remove useless packages from the cache
+  apt:
+    autoclean: yes
